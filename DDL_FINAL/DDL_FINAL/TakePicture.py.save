@@ -1,0 +1,37 @@
+from picamera import PiCamera
+from time import sleep
+import RPi.GPIO as GPIO
+
+
+led = 18
+
+
+def LED():
+	GPIO.etmode(GPIO.BOARD)
+	GPIO.setup(led, GPIO.OUT, initial =0)
+
+try:
+	GPIO.output(led, GPIO.HIGH)
+	print("ON")
+	sleep(1)
+	GPIO.output(led, GPIO.LOW)
+
+
+def TakePicture():
+	camera = PiCamera()
+	camera.start_preview()
+	
+sleep(2)
+	camera.capture('/home/pi/Desktop/DDL/Image.jpg')
+	camera.stop_preview()
+
+
+
+
+#************main*****************
+#1st take a picture resieze the dimension and set GPIO pins
+
+TakePicture()
+LED()
+
+
